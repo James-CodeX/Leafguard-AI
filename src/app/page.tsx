@@ -18,8 +18,9 @@ export default function HomePage() {
   const { toast } = useToast();
 
   const handleImageReady = (dataUri: string | null) => {
+    console.log('HomePage: handleImageReady called. imageDataUri will be set to:', dataUri ? dataUri.substring(0, 50) + '...' : null); // Diagnostic log
     setImageDataUri(dataUri);
-    setAnalysisResult(null); 
+    setAnalysisResult(null);
     setError(null);
     if (!dataUri) {
        toast({ title: "Image Cleared", description: "Upload a new image to analyze." });
@@ -62,16 +63,22 @@ export default function HomePage() {
             Upload an image of your plant, and our AI will help diagnose potential diseases and offer treatment advice.
           </p>
           <ImageUploader onImageReady={handleImageReady} />
+          
+          {/* Diagnostic text and Analyze Plant Button */}
           {imageDataUri && (
-            <Button
-              onClick={handleAnalyzePlant}
-              disabled={isLoadingAnalysis}
-              className="w-full mt-6 bg-primary hover:bg-primary/90 text-primary-foreground text-lg py-6 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
-              aria-label="Analyze plant image"
-            >
-              {isLoadingAnalysis ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <Sparkles className="mr-2 h-5 w-5" />}
-              {isLoadingAnalysis ? 'Analyzing...' : 'Analyze Plant'}
-            </Button>
+            <>
+              {/* You can remove this diagnostic paragraph once the issue is resolved */}
+              <p className="text-xs text-muted-foreground mt-2 text-center">Diagnostic: Image data is loaded and ready for analysis.</p>
+              <Button
+                onClick={handleAnalyzePlant}
+                disabled={isLoadingAnalysis}
+                className="w-full mt-4 bg-primary hover:bg-primary/90 text-primary-foreground text-lg py-6 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
+                aria-label="Analyze plant image"
+              >
+                {isLoadingAnalysis ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <Sparkles className="mr-2 h-5 w-5" />}
+                {isLoadingAnalysis ? 'Analyzing...' : 'Analyze Plant'}
+              </Button>
+            </>
           )}
         </section>
 
