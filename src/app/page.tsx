@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from 'react';
@@ -7,8 +6,9 @@ import ResultsDisplay from '@/components/leafguard/results-display';
 import Header from '@/components/layout/header';
 import { Button } from '@/components/ui/button';
 import { detectPlantDisease, type DetectPlantDiseaseOutput } from '@/ai/flows/detect-plant-disease';
-import { Loader2, Sparkles } from 'lucide-react';
+import { Loader2, Sparkles, Leaf, ArrowRight } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
+import { motion } from 'framer-motion';
 
 export default function HomePage() {
   const [imageDataUri, setImageDataUri] = useState<string | null>(null);
@@ -18,7 +18,6 @@ export default function HomePage() {
   const { toast } = useToast();
 
   const handleImageReady = (dataUri: string | null) => {
-    console.log('HomePage: handleImageReady called. imageDataUri will be set to:', dataUri ? dataUri.substring(0, 50) + '...' : null); // Diagnostic log
     setImageDataUri(dataUri);
     setAnalysisResult(null);
     setError(null);
@@ -51,50 +50,98 @@ export default function HomePage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground font-body">
+    <div className="flex flex-col min-h-screen font-body">
       <Header />
-      <main className="flex-grow container mx-auto px-4 py-8 flex flex-col items-center space-y-8">
-        <section className="w-full max-w-2xl p-6 bg-card shadow-xl rounded-lg border border-border">
-          <h2 className="text-3xl font-headline text-center mb-6 text-primary font-bold flex items-center justify-center gap-2">
-            <Sparkles className="h-7 w-7" />
-            Identify Plant Issues
-          </h2>
-          <p className="text-center text-muted-foreground mb-6">
-            Upload an image of your plant, and our AI will help diagnose potential diseases and offer treatment advice.
-          </p>
-          <ImageUploader onImageReady={handleImageReady} />
-          
-          {/* Diagnostic text and Analyze Plant Button */}
-          {imageDataUri && (
-            <>
-              {/* You can remove this diagnostic paragraph once the issue is resolved */}
-              <p className="text-xs text-muted-foreground mt-2 text-center">Diagnostic: Image data is loaded and ready for analysis.</p>
-              <Button
-                onClick={handleAnalyzePlant}
-                disabled={isLoadingAnalysis}
-                className="w-full mt-4 bg-primary hover:bg-primary/90 text-primary-foreground text-lg py-6 rounded-md transition-all duration-300 ease-in-out transform hover:scale-105"
-                aria-label="Analyze plant image"
-              >
-                {isLoadingAnalysis ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <Sparkles className="mr-2 h-5 w-5" />}
-                {isLoadingAnalysis ? 'Analyzing...' : 'Analyze Plant'}
-              </Button>
-            </>
-          )}
+      <main className="flex-grow container mx-auto px-4 py-12 flex flex-col items-center space-y-10 max-w-5xl">
+        <section className="text-center max-w-2xl mx-auto mb-4">
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
+              Plant Health Analysis
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Upload an image of your plant and let our AI diagnose issues and recommend treatments.
+            </p>
+          </motion.div>
         </section>
+        
+        <motion.section 
+          className="w-full max-w-2xl glass-card rounded-2xl overflow-hidden shadow-xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <div className="p-8">
+            <div className="flex items-center justify-center mb-6">
+              <div className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-primary/60 rounded-full blur-sm opacity-70"></div>
+                <div className="relative bg-white p-2 rounded-full">
+                  <Leaf className="h-8 w-8 text-primary" />
+                </div>
+              </div>
+            </div>
+            <h2 className="text-2xl font-semibold text-center mb-6 gradient-text">
+              Upload Your Plant Image
+            </h2>
+            <ImageUploader onImageReady={handleImageReady} />
+            
+            {imageDataUri && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                transition={{ duration: 0.3 }}
+                className="mt-6"
+              >
+                <Button
+                  onClick={handleAnalyzePlant}
+                  disabled={isLoadingAnalysis}
+                  className="w-full py-6 rounded-xl bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground text-lg font-medium shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+                  aria-label="Analyze plant image"
+                >
+                  {isLoadingAnalysis ? (
+                    <>
+                      <Loader2 className="h-5 w-5 animate-spin" />
+                      <span>Analyzing your plant...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="h-5 w-5" />
+                      <span>Analyze Plant</span>
+                      <ArrowRight className="h-4 w-4 ml-1" />
+                    </>
+                  )}
+                </Button>
+              </motion.div>
+            )}
+          </div>
+        </motion.section>
 
         {(isLoadingAnalysis || error || analysisResult) && (
-           <section className="w-full max-w-2xl">
+          <motion.section 
+            className="w-full max-w-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             <ResultsDisplay
               diagnosis={analysisResult?.diagnosis ?? null}
               treatment={analysisResult?.treatment ?? null}
               isLoading={isLoadingAnalysis}
               error={error}
             />
-          </section>
+          </motion.section>
         )}
       </main>
-      <footer className="text-center p-6 text-muted-foreground text-sm border-t border-border">
-        LeafGuard AI &copy; {new Date().getFullYear()} - Your personal plant health assistant.
+      <footer className="text-center p-8 text-muted-foreground text-sm border-t border-border/40 bg-background/50 backdrop-blur-sm">
+        <div className="container mx-auto">
+          <p className="mb-2">LeafGuard AI &copy; {new Date().getFullYear()} - Your personal plant health assistant.</p>
+          <p className="text-xs text-muted-foreground/70">
+            Helping gardeners identify and treat plant diseases with AI technology.
+          </p>
+        </div>
       </footer>
     </div>
   );

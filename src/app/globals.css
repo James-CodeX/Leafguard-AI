@@ -1,82 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: 'PT Sans', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 @layer base {
   :root {
-    --background: 60 56% 91%; /* Off-white #F5F5DC */
-    --foreground: 0 0% 15%; /* Darker foreground for better contrast on off-white */
-    --card: 60 56% 93%; /* Slightly lighter off-white for cards */
-    --card-foreground: 0 0% 15%;
-    --popover: 60 56% 93%;
-    --popover-foreground: 0 0% 15%;
-    --primary: 120 27% 65%; /* Soft green #8FBC8F */
-    --primary-foreground: 120 25% 10%; /* Dark green for text on primary bg */
-    --secondary: 60 30% 85%; /* A neutral secondary color */
-    --secondary-foreground: 0 0% 15%;
-    --muted: 60 30% 80%;
-    --muted-foreground: 0 0% 40%;
-    --accent: 34 43% 75%; /* Light brown #D2B48C */
-    --accent-foreground: 34 40% 20%; /* Dark brown for text on accent bg */
-    --destructive: 0 70% 50%; /* Adjusted red for better visibility */
-    --destructive-foreground: 0 0% 98%;
-    --border: 60 20% 80%; /* Softer border */
-    --input: 60 20% 85%; /* Input background */
-    --ring: 120 27% 55%; /* Ring color based on primary */
-    --chart-1: 120 27% 65%;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 145 80% 95%;
+    --secondary-foreground: 142.1 76.2% 36.3%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 145 80% 95%;
+    --accent-foreground: 142.1 76.2% 36.3%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 142.1 76.2% 36.3%;
+    --chart-1: 142.1 76.2% 36.3%;
     --chart-2: 34 43% 75%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    /* Sidebar specific colors - less relevant for this app but defined in shadcn */
-    --sidebar-background: 60 50% 88%; 
-    --sidebar-foreground: 0 0% 15%;
-    --sidebar-primary: 120 27% 60%;
-    --sidebar-primary-foreground: 120 25% 10%;
-    --sidebar-accent: 34 43% 70%;
-    --sidebar-accent-foreground: 34 40% 20%;
-    --sidebar-border: 60 20% 75%;
-    --sidebar-ring: 120 27% 55%;
+    /* Sidebar specific colors */
+    --sidebar-background: 0 0% 100%; 
+    --sidebar-foreground: 222.2 84% 4.9%;
+    --sidebar-primary: 142.1 76.2% 36.3%;
+    --sidebar-primary-foreground: 355.7 100% 97.3%;
+    --sidebar-accent: 145 80% 95%;
+    --sidebar-accent-foreground: 142.1 76.2% 36.3%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+    --sidebar-ring: 142.1 76.2% 36.3%;
   }
 
   .dark {
-    /* Keeping dark mode fairly standard, can be adjusted later if needed */
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 120 27% 65%; /* Soft green for dark mode too */
-    --primary-foreground: 120 25% 15%; 
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 34 43% 75%; /* Light brown for dark mode too */
-    --accent-foreground: 34 40% 25%;
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 142.1 70.6% 45.3%;
+    --primary-foreground: 144.9 80.4% 10%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 120 27% 55%;
-    --chart-1: 120 27% 65%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 142.1 76.2% 36.3%;
+    --chart-1: 142.1 70.6% 45.3%;
     --chart-2: 34 43% 75%;
 
-    --sidebar-background: 0 0% 8%; 
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 120 27% 60%;
-    --sidebar-primary-foreground: 120 25% 15%;
-    --sidebar-accent: 34 43% 70%;
-    --sidebar-accent-foreground: 34 40% 25%;
-    --sidebar-border: 0 0% 18%;
-    --sidebar-ring: 120 27% 55%;
+    --sidebar-background: 222.2 84% 4.9%; 
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 142.1 70.6% 45.3%;
+    --sidebar-primary-foreground: 144.9 80.4% 10%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: 142.1 76.2% 36.3%;
   }
 }
 
@@ -86,5 +87,19 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg;
+  }
+  
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
   }
 }
