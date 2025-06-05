@@ -193,7 +193,7 @@ export default function ImageUploader({ onImageReady }: ImageUploaderProps) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="mt-6 p-4 rounded-xl shadow-sm relative bg-white/80 backdrop-blur-sm border border-border/50"
+          className="mt-6 p-4 rounded-xl shadow-sm relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-border/50"
         >
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-medium flex items-center gap-1.5 text-primary">
@@ -209,7 +209,7 @@ export default function ImageUploader({ onImageReady }: ImageUploaderProps) {
               <XCircle className="h-4 w-4" />
             </Button>
           </div>
-          <div className="relative bg-secondary/20 rounded-lg overflow-hidden">
+          <div className="relative bg-secondary/20 dark:bg-gray-700/20 rounded-lg overflow-hidden">
             <Image 
               src={previewUrl} 
               alt="Plant preview" 

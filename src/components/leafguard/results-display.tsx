@@ -17,11 +17,11 @@ export default function ResultsDisplay({ diagnosis, treatment, isLoading, error 
   if (isLoading) {
     return (
       <Card className="w-full glass-card shadow-xl overflow-hidden">
-        <CardHeader className="bg-secondary/50 pb-6">
+        <CardHeader className="bg-secondary/50 dark:bg-gray-800/50 pb-6">
           <div className="flex justify-center mb-2">
             <div className="relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-primary/30 to-primary/10 rounded-full blur-sm opacity-70 animate-pulse"></div>
-              <div className="relative bg-white p-1.5 rounded-full">
+              <div className="relative bg-white dark:bg-gray-800 p-1.5 rounded-full">
                 <Leaf className="h-6 w-6 text-primary animate-pulse" />
               </div>
             </div>
@@ -80,11 +80,11 @@ export default function ResultsDisplay({ diagnosis, treatment, isLoading, error 
       transition={{ duration: 0.4 }}
     >
       <Card className="w-full glass-card shadow-xl overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-primary/10 to-secondary/30 pb-6">
+        <CardHeader className="bg-gradient-to-r from-primary/10 to-secondary/30 dark:from-primary/5 dark:to-gray-800/50 pb-6">
           <div className="flex justify-center mb-2">
             <div className="relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-primary to-primary/60 rounded-full blur-sm opacity-70"></div>
-              <div className="relative bg-white p-1.5 rounded-full">
+              <div className="relative bg-white dark:bg-gray-800 p-1.5 rounded-full">
                 <CheckCircle2 className="h-6 w-6 text-primary" />
               </div>
             </div>

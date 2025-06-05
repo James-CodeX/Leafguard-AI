@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ImageUploader from '@/components/leafguard/image-uploader';
 import ResultsDisplay from '@/components/leafguard/results-display';
 import Header from '@/components/layout/header';
@@ -15,7 +15,13 @@ export default function HomePage() {
   const [isLoadingAnalysis, setIsLoadingAnalysis] = useState<boolean>(false);
   const [analysisResult, setAnalysisResult] = useState<DetectPlantDiseaseOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [currentYear, setCurrentYear] = useState<number>(2023); // Default year to prevent hydration mismatch
   const { toast } = useToast();
+
+  // Set the current year after component mounts to prevent hydration mismatch
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
 
   const handleImageReady = (dataUri: string | null) => {
     setImageDataUri(dataUri);
@@ -78,7 +84,7 @@ export default function HomePage() {
             <div className="flex items-center justify-center mb-6">
               <div className="relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary to-primary/60 rounded-full blur-sm opacity-70"></div>
-                <div className="relative bg-white p-2 rounded-full">
+                <div className="relative bg-white dark:bg-gray-800 p-2 rounded-full">
                   <Leaf className="h-8 w-8 text-primary" />
                 </div>
               </div>
@@ -135,9 +141,9 @@ export default function HomePage() {
           </motion.section>
         )}
       </main>
-      <footer className="text-center p-8 text-muted-foreground text-sm border-t border-border/40 bg-background/50 backdrop-blur-sm">
+      <footer className="text-center p-8 text-muted-foreground text-sm border-t border-border/40 bg-background/50 dark:bg-background/10 backdrop-blur-sm">
         <div className="container mx-auto">
-          <p className="mb-2">LeafGuard AI &copy; {new Date().getFullYear()} - Your personal plant health assistant.</p>
+          <p className="mb-2">LeafGuard AI &copy; {currentYear} - Your personal plant health assistant.</p>
           <p className="text-xs text-muted-foreground/70">
             Helping gardeners identify and treat plant diseases with AI technology.
           </p>
